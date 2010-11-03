@@ -5,6 +5,7 @@ require 'test/unit'
 class BasicUserRepositoryTest < Test::Unit::TestCase
   
   Id = 13
+  SerializationFile = 'user_repo.rbser'
   
   def create_user_info
     h = Hash.new
@@ -65,6 +66,19 @@ class BasicUserRepositoryTest < Test::Unit::TestCase
     info_in = create_user_info
     repo.register(info_in)
     info_out = repo.get(Id)
+    assert_equal(Id, info_out[:id])
+    assert_equal(info_in[:name][:first], info_out[:name][:first])
+    assert_equal(info_in[:name][:last], info_out[:name][:last])
+  end
+  
+  def test_serialization
+    repo_in = BasicUserRepository.new
+    info_in = create_user_info
+    repo_in.register(info_in)
+    File.open(SerializationFile, 'w+') { |f| Marshal.dump(repo_in, f) }
+    repo_out = nil
+    File.open(SerializationFile) { |f| repo_out = Marshal.load(f) }
+    info_out = repo_out.get(Id)
     assert_equal(Id, info_out[:id])
     assert_equal(info_in[:name][:first], info_out[:name][:first])
     assert_equal(info_in[:name][:last], info_out[:name][:last])
