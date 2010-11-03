@@ -1,5 +1,9 @@
 class ExchangeManager
   
+  def initialize(user_repository)
+    @user_repository = user_repository
+  end
+  
   def register_user(user_info)
   end
   
@@ -20,7 +24,5 @@ class ExchangeManager
   
   def get_negotiation(id)
   end
-  
-  
   
 end
