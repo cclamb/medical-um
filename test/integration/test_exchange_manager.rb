@@ -14,6 +14,8 @@ class TestExchangeManager < Test::Unit::TestCase
     user_b = Object.new
     mgr = ExchangeManager.new(BasicUserRepository.new)
     
+    # Where does the negitiation start? how is it initiated?
+    # do we care?
     neg_record = mgr.initiate_negotiation(user_a, user_b)
     
     assert_equal(user_a, neg_record[:producer])
