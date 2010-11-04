@@ -1,5 +1,7 @@
 class ExchangeManager
   
+  Id = 13
+  
   def initialize(user_repository)
     @user_repository = user_repository
   end
@@ -16,7 +18,8 @@ class ExchangeManager
   def update_user(user_info)
   end
   
-  def initiate_negotiation
+  def initiate_negotiation(producer, consumer)
+    return { :id => Id, :producer => producer, :consumer => consumer }
   end
   
   def update_negotiation(negotiation_info)
